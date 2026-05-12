@@ -1,0 +1,6 @@
+book_ID,ID,number,createdAt,createdBy,modifiedAt,modifiedBy
+59049fcd-607e-4d9b-a879-b76aa4f69d44,4393317b-ed78-4886-89fd-e73bf092979c,64,2020-11-12T00:00:00.000Z,createdBy.2m5wl@example.org,2015-04-15T00:00:00.000Z,modifiedBy.2m5wl@example.org
+59050a51-7309-4c9a-9a24-e94e42bffc63,14858197-5a58-44db-82ae-b79c0a7fd8b3,42,2019-02-14T00:00:00.000Z,createdBy.8ugnp@example.com,2020-05-10T00:00:00.000Z,modifiedBy.8ugnp@example.net
+59051529-502f-4dc2-92c9-b2a01d84bb83,11385288-71e1-4c83-b73f-9d8856fca7c0,59,2016-05-23T00:00:00.000Z,createdBy.6s0y0@example.com,2020-06-01T00:00:00.000Z,modifiedBy.6s0y0@example.org
+59052ef6-fd90-4ea7-833f-ad27cbb00c3d,2688274b-3bfc-412b-a5ea-d5c6f4d5dc2d,10,2001-08-17T00:00:00.000Z,createdBy.1lmaa@example.net,2008-08-06T00:00:00.000Z,modifiedBy.1lmaa@example.net
+59053c16-2717-4c60-a960-fc3bd5dbded4,10401332-d431-4feb-a712-37ec35e7fd14,50,2010-08-12T00:00:00.000Z,createdBy.66xpw@example.net,2015-02-11T00:00:00.000Z,modifiedBy.66xpw@example.net
