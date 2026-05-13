@@ -7,10 +7,14 @@ namespace tutorial.db;
 
 entity Books : cuid, managed {
 
-    title    : String;
-    author   : Association to Authors;
-    chapters : Composition of Chapters
-                   on chapters.book = $self;
+    title       : String;
+    author      : Association to Authors;
+    genre       : String;
+    publishedAT : Date;
+    pages       : Integer;
+    price       : Decimal(9, 2);
+    chapters    : Composition of Chapters
+                      on chapters.book = $self;
 /*
 Bu Book’un bölümleri var ve bu bölümler Book’a bağlıdır.
 Bu da bağlantı şartı:
