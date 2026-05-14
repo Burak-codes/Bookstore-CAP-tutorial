@@ -13,8 +13,8 @@ entity Books : cuid, managed {
     publishedAT : Date;
     pages       : Integer;
     price       : Decimal(9, 2);
-    chapters    : Composition of Chapters
-                      on chapters.book = $self;
+chapters : Composition of many Chapters
+              on chapters.book = $self;
 /*
 Bu Book’un bölümleri var ve bu bölümler Book’a bağlıdır.
 Bu da bağlantı şartı:
@@ -36,6 +36,8 @@ entity Authors : cuid, managed {
 }
 
 entity Chapters : cuid, managed {
-        number : Integer;
     key book   : Association to Books;
+        number : Integer;
+        title  : String;
+        pages  : Integer;
 }
