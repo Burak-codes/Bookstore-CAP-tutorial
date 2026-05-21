@@ -7,11 +7,14 @@ using {
 
 namespace tutorial.db;
 
+/* 
+İnal
+*/   
 entity Books : cuid, managed {
 
     title       : String;
     author      : Association to Authors;
-    genre       : String;
+    genre       : Association to Genres;
     publishedAT : Date;
     pages       : Integer;
     price       : Decimal(9, 2);
@@ -31,6 +34,11 @@ Kitap ana varlık, chapter onun çocuğu gibi.
 */
 
 
+}
+
+entity Genres {
+    key code :String;
+    description : String;
 }
 
 entity BookStatus {
