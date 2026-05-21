@@ -22,6 +22,15 @@ this.on('changePublishDate', Books, async (req) => {
     .where({ ID: bookId })
 })
 
+this.on('changeStatus', Books, async (req) => {
+  const bookId = req.params[0].ID
+  const newStatus = req.data['newStatus']
+
+  await UPDATE(Books)
+    .set({ status_code: newStatus })
+    .where({ ID: bookId })
+})
+
     this.before('READ', Books, async (req) => {
       console.log('Before READ Books')
     })

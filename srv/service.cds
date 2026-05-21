@@ -3,24 +3,25 @@ using {tutorial.db as db} from '../db/schema';
 service BookstoreService {
     entity Books      as projection on db.Books
         actions {
+            @(Common.SideEffects: {TargetProperties: ['stock']})
             action addStock();
             action changePublishDate(newDate: Date);
-        action changeStatus(
-    @(Common : {
-        ValueListWithFixedValues : true,
-        Label : 'New Status',
-        ValueList : {
-            $Type : 'Common.ValueListType',
-            CollectionPath : 'BookStatus',
-            Parameters : [{
-                $Type : 'Common.ValueListParameterInOut',
-                LocalDataProperty : newStatus,
-                ValueListProperty : 'code'
-            }]
-        }
-    })
-    newStatus : String
-);
+            @(Common.SideEffects: {TargetProperties: ['status_code']})
+            action changeStatus(
+                                @(Common: {
+                                    ValueListWithFixedValues: true,
+                                    Label                   : 'New Status',
+                                    ValueList               : {
+                                        $Type         : 'Common.ValueListType',
+                                        CollectionPath: 'BookStatus',
+                                        Parameters    : [{
+                                            $Type            : 'Common.ValueListParameterInOut',
+                                            LocalDataProperty: newStatus,
+                                            ValueListProperty: 'code'
+                                        }]
+                                    }
+                                })
+                                newStatus: String);
         };
 
     entity Authors    as projection on db.Authors;
