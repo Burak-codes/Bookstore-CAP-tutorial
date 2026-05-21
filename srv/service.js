@@ -3,6 +3,12 @@ import { Books } from '#cds-models/BookstoreService'
 
 export default class BookstoreService extends cds.ApplicationService {
   async init() {
+
+
+    this.on('addDiscount', async (req) => {
+
+      await UPDATE(Books).set({ price: { func: 'ROUND', args: [{ xpr: [{ ref: ['price'] }, '*', { val: 0.9 }] },{ val: 2} ] } })
+    })
     // Books entity'si için addStock action'ı çalışınca tetiklenir
     // Kullanıcının işlem yaptığı kitabın ID'sini alıyoruz.
     // Bound action olduğu için ID bilgisi req.params[0].ID içinden gelir.
@@ -13,23 +19,23 @@ export default class BookstoreService extends cds.ApplicationService {
       // İlgili kitabın stock değerini 1 artırır
     })
 
-this.on('changePublishDate', Books, async (req) => {
-  const bookId = req.params[0].ID
-  const newDate = req.data['newDate']
+    this.on('changePublishDate', Books, async (req) => {
+      const bookId = req.params[0].ID
+      const newDate = req.data['newDate']
 
-  await UPDATE(Books)
-    .set({ publishedAT: newDate })
-    .where({ ID: bookId })
-})
+      await UPDATE(Books)
+        .set({ publishedAT: newDate })
+        .where({ ID: bookId })
+    })
 
-this.on('changeStatus', Books, async (req) => {
-  const bookId = req.params[0].ID
-  const newStatus = req.data['newStatus']
+    this.on('changeStatus', Books, async (req) => {
+      const bookId = req.params[0].ID
+      const newStatus = req.data['newStatus']
 
-  await UPDATE(Books)
-    .set({ status_code: newStatus })
-    .where({ ID: bookId })
-})
+      await UPDATE(Books)
+        .set({ status_code: newStatus })
+        .where({ ID: bookId })
+    })
 
     this.before('READ', Books, async (req) => {
       console.log('Before READ Books')

@@ -135,6 +135,11 @@ annotate service.Books with @(
             Action : 'BookstoreService.addStock',
             Label : 'Add Stock',
         },
+        {
+            $Type : 'UI.DataFieldForAction',
+            Action : 'BookstoreService.EntityContainer/addDiscount',
+            Label : '10% Discount',
+        },
     ],
     UI.SelectionFields : [
         genre,
