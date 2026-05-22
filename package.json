@@ -16,6 +16,17 @@
     "watch-sandbox": "cds watch --open bookstore-listview/webapp/test/flpSandbox.html?sap-ui-xx-viewCache=false --livereload false"
   },
   "private": true,
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "sqlite",
+        "impl": "@cap-js/sqlite",
+        "credentials": {
+          "url": "db.sqlite"
+        }
+      }
+    }
+  },
   "workspaces": [
     "app/*"
   ],
