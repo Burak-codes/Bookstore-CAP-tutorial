@@ -2,14 +2,16 @@ using {
     cuid,
     managed,
     sap.common.Currencies
-    
+
 } from '@sap/cds/common';
+using {Attachments} from '@cap-js/attachments';
+
 
 namespace tutorial.db;
 
-/* 
+/*
 İnal
-*/   
+*/
 entity Books : cuid, managed {
 
     title       : String;
@@ -37,8 +39,8 @@ Kitap ana varlık, chapter onun çocuğu gibi.
 }
 
 entity Genres {
-    key code :String;
-    description : String;
+    key code        : String;
+        description : String;
 }
 
 entity BookStatus {
@@ -53,10 +55,25 @@ entity BookStatus {
 
 
 entity Authors : cuid, managed {
-    name  : String;
+    name     : String;
+    filename : String;
+    filetype : String @Core.IsMediaType;
+
+    attachments : Composition of many Attachments;
+
+    @Core.MediaType: filetype
+    @Core.AcceptableMediaTypes: [
+        'application/pdf',
+        'image/jpeg',
+        'image/png'
+    ]
+    @Core.ContentDisposition.Filename: filename
+    content  : LargeBinary;
+
     books : Association to many Books
-                on books.author = $self;
+        on books.author = $self;
 }
+
 
 entity Chapters : cuid, managed {
     key book   : Association to Books;
