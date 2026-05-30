@@ -1,13 +1,15 @@
 import cds from '@sap/cds'
-import { Books } from '#cds-models/BookstoreService'
+import { Authors, Books } from '#cds-models/BookstoreService'
 
 export default class BookstoreService extends cds.ApplicationService {
   async init() {
 
 
     this.on('addDiscount', async (req) => {
+      await UPDATE(Books)
+        .set`price = ROUND(price * 0.9, 2)`
 
-      await UPDATE(Books).set({ price: { func: 'ROUND', args: [{ xpr: [{ ref: ['price'] }, '*', { val: 0.9 }] },{ val: 2} ] } })
+      return 'Tüm kitaplara %10 indirim uygulandı.'
     })
     // Books entity'si için addStock action'ı çalışınca tetiklenir
     // Kullanıcının işlem yaptığı kitabın ID'sini alıyoruz.
@@ -52,7 +54,17 @@ export default class BookstoreService extends cds.ApplicationService {
           book.price = book.price * 0.8
         }
       }
+      console.log('AFTER READ')
     })
+  this.after('READ', Authors, async (authors) => {
+  const authorList = Array.isArray(authors) ? authors : [authors]
+
+  for (const author of authorList) {
+    const books = await SELECT.from(Books).where({ author_ID: author.ID })
+
+    author.bookCount = books.length
+  }
+})
 
     return super.init()
   }

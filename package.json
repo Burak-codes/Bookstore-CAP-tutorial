@@ -1,5 +1,5 @@
 {
-  "name": "Bookstore",
+  "name": "bookstore",
   "version": "1.0.0",
   "dependencies": {
     "@cap-js/attachments": "^3.12.2",
@@ -25,6 +25,24 @@
         "impl": "@cap-js/sqlite",
         "credentials": {
           "url": "db.sqlite"
+        }
+      },
+      "auth": {
+        "kind": "mocked",
+        "users": {
+          "missey": {
+            "password": "2727",
+            "roles": [
+              "Admin"
+            ]
+          },
+       "imo": {
+  "password": "2758",
+  "roles": [
+    "user-that-can-call-action",
+    "only-read-access"
+  ]
+}
         }
       }
     }
