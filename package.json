@@ -39,8 +39,7 @@
        "imo": {
   "password": "2758",
   "roles": [
-    "user-that-can-call-action",
-    "only-read-access"
+    "user-that-can-call-action"
   ]
 }
         }

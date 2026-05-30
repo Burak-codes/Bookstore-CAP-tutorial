@@ -11,7 +11,7 @@ service BookstoreService {
         },
         {
             grant: 'READ',
-            to   : 'only-read-access'
+            to   : 'authenticated-user'
         }
     ])
     entity Books      as projection on db.Books
@@ -48,5 +48,8 @@ service BookstoreService {
 }
 
 annotate BookstoreService.Books with @odata.draft.enabled;
-annotate BookstoreService.Authors with @odata.draft.enabled;
-annotate BookstoreService.Authors with @requires: 'admin';
+
+annotate BookstoreService.Authors with @(
+    odata.draft.enabled,
+    requires: 'admin'
+)
