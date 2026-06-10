@@ -1,12 +1,10 @@
 using {tutorial.db as db} from '../db/schema';
 
 service BookstoreService {
+
     @(restrict: [
         {
-            grant: [
-                'READ',
-                'WRITE'
-            ],
+            grant: '*',
             to   : 'admin'
         },
         {
@@ -14,31 +12,34 @@ service BookstoreService {
             to   : 'authenticated-user'
         }
     ])
-    entity Books      as projection on db.Books
+    entity Books as projection on db.Books
         actions {
             @(Common.SideEffects: {TargetProperties: ['stock']})
             action addStock();
+
             action changePublishDate(newDate: Date);
+
             @(Common.SideEffects: {TargetProperties: ['status_code']})
             action changeStatus(
-                                @(Common: {
-                                    ValueListWithFixedValues: true,
-                                    Label                   : 'New Status',
-                                    ValueList               : {
-                                        $Type         : 'Common.ValueListType',
-                                        CollectionPath: 'BookStatus',
-                                        Parameters    : [{
-                                            $Type            : 'Common.ValueListParameterInOut',
-                                            LocalDataProperty: newStatus,
-                                            ValueListProperty: 'code'
-                                        }]
-                                    }
-                                })
-                                newStatus: String);
+                @(Common: {
+                    ValueListWithFixedValues: true,
+                    Label                   : 'New Status',
+                    ValueList               : {
+                        $Type         : 'Common.ValueListType',
+                        CollectionPath: 'BookStatus',
+                        Parameters    : [{
+                            $Type            : 'Common.ValueListParameterInOut',
+                            LocalDataProperty: newStatus,
+                            ValueListProperty: 'code'
+                        }]
+                    }
+                })
+                newStatus: String
+            );
         };
 
     @(Common.SideEffects: {TargetEntities: ['/BookstoreService.EntityContainer/Books']})
-    @(requires: 'user-that-can-call-action')
+    @(requires: 'admin')
     action addDiscount();
 
     entity Authors    as projection on db.Authors;
@@ -52,4 +53,4 @@ annotate BookstoreService.Books with @odata.draft.enabled;
 annotate BookstoreService.Authors with @(
     odata.draft.enabled,
     requires: 'admin'
-)
+);

@@ -1,6 +1,0 @@
-GET http://localhost:4004/odata/v4/bookstore/$metadata 
-###
-GET http://localhost:4004/odata/v4/bookstore/chapters
-###
-GET http://localhost:4004/odata/v4/bookstore/Books
-Authorization: Basic bWlzc2V5OjI3Mjc=

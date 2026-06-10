@@ -27,23 +27,35 @@
           "url": "db.sqlite"
         }
       },
-      "auth": {
-        "kind": "mocked",
-        "users": {
-          "missey": {
-            "password": "2727",
-            "roles": [
-              "Admin"
-            ]
-          },
-       "imo": {
-  "password": "2758",
-  "roles": [
-    "user-that-can-call-action"
-  ]
+    "auth": {
+  "kind": "mocked",
+  "users": {
+    "admin": {
+      "password": "admin",
+      "roles": [
+        "admin",
+        "Admin",
+        "authenticated-user",
+        "user-that-can-call-action"
+      ]
+    },
+    "missey": {
+      "password": "2727",
+      "roles": [
+        "admin",
+        "Admin",
+        "authenticated-user",
+        "user-that-can-call-action"
+      ]
+    },
+    "imo": {
+      "password": "2758",
+      "roles": [
+        "authenticated-user"
+      ]
+    }
+  }
 }
-        }
-      }
     }
   },
   "workspaces": [
